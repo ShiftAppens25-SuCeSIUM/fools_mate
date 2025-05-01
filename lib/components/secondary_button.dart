@@ -22,7 +22,7 @@ class SecondaryButton extends StatelessWidget {
           side: BorderSide(color: AppColors.primary),
           foregroundColor: AppColors.primary,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(6),
+            borderRadius: BorderRadius.circular(5),
           ),
         ),
         child: Row(

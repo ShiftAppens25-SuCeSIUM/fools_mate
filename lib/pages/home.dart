@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:fools_mate/components/logo.dart';
 import 'package:fools_mate/components/primary_button.dart';
 import 'package:fools_mate/components/secondary_button.dart';
 import 'package:fools_mate/globals.dart';
+import 'package:fools_mate/pages/checker.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -9,27 +11,20 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: AppColors.background,
-        body: SingleChildScrollView(
-            child: Padding(
-          padding: const EdgeInsets.all(12.0),
+      backgroundColor: AppColors.background,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(18),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset(
-                  'lib/assets/logo.png',
-                  height: 100,
+                SizedBox(height: 60),
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: Logo(height: 130),
                 ),
                 SizedBox(height: 20),
-                Text(
-                  'CHECKMATE',
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 8),
                 Text(
                   'Truth, Verified.',
                   style: TextStyle(
@@ -38,7 +33,7 @@ class Home extends StatelessWidget {
                     color: AppColors.slogan,
                   ),
                 ),
-                SizedBox(height: 30),
+                SizedBox(height: 50),
                 Card(
                   color: AppColors.card,
                   elevation: 4,
@@ -50,29 +45,33 @@ class Home extends StatelessWidget {
                     child: Column(
                       children: [
                         TextField(
-                          minLines: 3,
-                          maxLines: 3,
+                          minLines: 6,
+                          maxLines: 6,
                           decoration: InputDecoration(
-                            border: OutlineInputBorder(
+                            enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: AppColors.primary,
+                                color: AppColors.neutral,
+                                width: 0.4,
                               ),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: AppColors.primary,
-                                width: 2.0,
+                                width: 1.0,
                               ),
                             ),
                           ),
                         ),
                         SizedBox(height: 16),
-                        PrimaryButton(text: "Submit text", onPressed: () {}),
+                        PrimaryButton(
+                            text: "Submit text",
+                            onPressed: () => Navigator.of(context).push(
+                                MaterialPageRoute(builder: (_) => Checker()))),
                         SizedBox(height: 7),
                         Text("OR",
                             style: TextStyle(
                               fontSize: 16,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w900,
                               color: AppColors.primary,
                             )),
                         SizedBox(height: 7),
@@ -84,6 +83,8 @@ class Home extends StatelessWidget {
               ],
             ),
           ),
-        )));
+        ),
+      ),
+    );
   }
 }
