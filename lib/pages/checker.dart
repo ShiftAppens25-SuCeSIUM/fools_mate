@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:fools_mate/components/logo.dart';
 import 'package:fools_mate/globals.dart';
+import 'package:fools_mate/logic/query.dart';
 
 class Checker extends StatelessWidget {
-  const Checker({super.key});
+  final Query query;
+
+  const Checker({required this.query, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +22,12 @@ class Checker extends StatelessWidget {
                 child: Logo(height: 50),
               ),
               SizedBox(height: 50),
-              //TODO: prompt
+              query.promptView(),
               SizedBox(height: 30),
-              //TODO: rating
+              FutureBuilder(
+                future: query.fetchReview(),
+                builder: (context, snapshot) => Container(),
+              ),
             ],
           ),
         ),

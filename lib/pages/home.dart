@@ -3,6 +3,7 @@ import 'package:fools_mate/components/logo.dart';
 import 'package:fools_mate/components/primary_button.dart';
 import 'package:fools_mate/components/secondary_button.dart';
 import 'package:fools_mate/globals.dart';
+import 'package:fools_mate/logic/query.dart' as queries;
 import 'package:fools_mate/pages/checker.dart';
 
 class Home extends StatelessWidget {
@@ -64,9 +65,13 @@ class Home extends StatelessWidget {
                         ),
                         SizedBox(height: 16),
                         PrimaryButton(
-                            text: "Submit text",
-                            onPressed: () => Navigator.of(context).push(
-                                MaterialPageRoute(builder: (_) => Checker()))),
+                          text: "Submit text",
+                          onPressed: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    Checker(query: queries.TextQuery("cenas"))),
+                          ),
+                        ),
                         SizedBox(height: 7),
                         Text("OR",
                             style: TextStyle(
@@ -75,7 +80,14 @@ class Home extends StatelessWidget {
                               color: AppColors.primary,
                             )),
                         SizedBox(height: 7),
-                        SecondaryButton(text: "Upload media", onPressed: () {})
+                        SecondaryButton(
+                          text: "Upload media",
+                          onPressed: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    Checker(query: queries.MediaQuery())),
+                          ),
+                        ),
                       ],
                     ),
                   ),

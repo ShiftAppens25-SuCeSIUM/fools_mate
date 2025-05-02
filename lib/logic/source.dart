@@ -17,13 +17,13 @@ class Source {
     required this.date,
   });
 
-  Source.fromMap(Map<String, dynamic> json)
+  Source.fromMap(Map<String, dynamic> map)
       : this(
-          publisher: json['publisher']['name'],
-          website: json['publisher']['site'],
-          url: json['information_url'],
+          publisher: map['publisher']['name'],
+          website: map['publisher']['site'],
+          url: map['information_url'],
           details: '',
-          date: DateFormat("yyyy-MM-ddTHH:mm:ss").tryParse(json['reviewDate'])!,
+          date: DateFormat("yyyy-MM-ddTHH:mm:ss").tryParse(map['reviewDate'])!,
         );
 
   Source.fromJson(String json)

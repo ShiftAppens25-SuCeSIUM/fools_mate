@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+const String API = "cena_fixe.com";
+
 class AppColors {
   static const Color primary = Color(0xFF8A5CF6);
   static const Color card = Colors.white;
