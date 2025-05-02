@@ -63,11 +63,12 @@ class SourceCard extends StatelessWidget {
                   ),
                 ),
               const SizedBox(height: 20),
-              Expanded(
+              Flexible(
+                fit: FlexFit.loose,
                 child: Text(
                   source.details,
                   softWrap: true,
-                  overflow: TextOverflow.ellipsis,
+                  overflow: TextOverflow.fade,
                 ),
               ),
             ],
