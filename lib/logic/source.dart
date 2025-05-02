@@ -22,7 +22,7 @@ class Source {
           publisher: map['publisher']['name'],
           website: map['publisher']['site'],
           url: map['information_url'],
-          details: '',
+          details: map['review'],
           //date: DateFormat("yyyy-MM-ddTHH:mm:ss").tryParse(map['reviewDate'])!,
         );
 
