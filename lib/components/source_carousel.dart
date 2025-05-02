@@ -14,6 +14,7 @@ class SourceCarousel extends StatelessWidget {
   Widget build(BuildContext context) {
     return CarouselSlider(
       options: CarouselOptions(
+        viewportFraction: 1.0,
         height: 280,
         enlargeCenterPage: true,
         enableInfiniteScroll: false,

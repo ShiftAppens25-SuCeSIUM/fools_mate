@@ -36,7 +36,7 @@ class _CheckerState extends State<Checker> {
     return Scaffold(
       backgroundColor: AppColors.background,
       body: Padding(
-        padding: EdgeInsets.all(18),
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
         child: SingleChildScrollView(
           child: FutureBuilder(
               future: review,
