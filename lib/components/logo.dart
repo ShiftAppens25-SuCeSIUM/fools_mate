@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fools_mate/globals.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class Logo extends StatelessWidget {
   final double height;
@@ -12,19 +11,19 @@ class Logo extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Image.asset("lib/assets/logo-purple.png", height: height),
+        Image.asset("assets/logo-purple.png", height: height),
         SizedBox(width: height / 10),
         Column(
           children: [
             SizedBox(height: height * 20 / 100),
             Text(
               "CHECKMATE",
-              style: GoogleFonts.bebasNeue(
+              style: TextStyle(
+                fontFamily: "BebasNeue",
                 fontSize: height,
-                fontWeight: FontWeight.normal,
                 color: AppColors.primary,
               ),
-            )
+            ),
           ],
         ),
       ],

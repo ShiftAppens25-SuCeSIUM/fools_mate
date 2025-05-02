@@ -24,8 +24,10 @@ class _CheckerState extends State<Checker> {
     super.initState();
     review = widget.query.fetchReview();
     review.catchError((e, s) {
+      debugPrint("ERROR: $e");
+      debugPrint("Stack trace:");
       debugPrintStack(stackTrace: s);
-      debugPrint(e);
+      debugPrint("---------------------------------------------------------");
     }).ignore();
   }
 

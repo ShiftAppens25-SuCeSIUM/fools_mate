@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class StatusIcon extends StatelessWidget {
   final String status;
@@ -42,9 +41,9 @@ class StatusIcon extends StatelessWidget {
           padding: const EdgeInsets.only(top: 3.0),
           child: Text(
             status.toUpperCase(),
-            style: GoogleFonts.bebasNeue(
+            style: TextStyle(
+              fontFamily: "BebasNeue",
               fontSize: 32,
-              fontWeight: FontWeight.bold,
               color: _getStatusColor(status),
             ),
           ),
