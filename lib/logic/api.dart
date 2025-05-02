@@ -16,6 +16,7 @@ Future<FactReview> reviewText(String query) async {
     body: jsonEncode({"query": query}),
   );
 
+  print(response.body);
   return FactReview.fromJson(response.body);
 }
 
@@ -30,5 +31,6 @@ Future<FactReview> reviewURL(String url) async {
     body: jsonEncode({"query": url}),
   );
 
+  print(response.body);
   return FactReview.fromJson(response.body);
 }

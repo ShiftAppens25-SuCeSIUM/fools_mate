@@ -33,7 +33,7 @@ class ScoreCard extends StatelessWidget {
                 style: TextStyle(fontSize: 16, color: Colors.black),
                 children: [
                   TextSpan(
-                    text: '${(confidence / 100).round()}%',
+                    text: '${(confidence * 100).round()}%',
                     style: TextStyle(
                       color: AppColors.primary,
                       fontWeight: FontWeight.w600,

@@ -30,8 +30,10 @@ class _MyAppState extends State<MyApp> {
     _intentDataStreamSubscription = FlutterSharingIntent.instance
         .getMediaStream()
         .listen((List<SharedFile> value) {
-      print("Shared: getMediaStream ${value.map((f) => f.value).join(",")}");
-      handleSharedContent(value.first);
+      if (value.isNotEmpty) {
+        print("Shared: getMediaStream ${value.map((f) => f.value).join(",")}");
+        handleSharedContent(value.first);
+      }
     }, onError: (err) {
       print("getIntentDataStream error: $err");
     });
@@ -40,8 +42,10 @@ class _MyAppState extends State<MyApp> {
     FlutterSharingIntent.instance
         .getInitialSharing()
         .then((List<SharedFile> value) {
-      print("Shared: getInitialMedia ${value.map((f) => f.value).join(",")}");
-      handleSharedContent(value.first);
+      if (value.isNotEmpty) {
+        print("Shared: getInitialMedia ${value.map((f) => f.value).join(",")}");
+        handleSharedContent(value.first);
+      }
     });
   }
 
