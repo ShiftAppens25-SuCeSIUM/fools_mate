@@ -7,14 +7,14 @@ class Source {
 
   final String url;
   final String details;
-  final DateTime date;
+  //final DateTime date;
 
   const Source({
     required this.publisher,
     required this.website,
     required this.url,
     required this.details,
-    required this.date,
+    //required this.date,
   });
 
   Source.fromMap(Map<String, dynamic> map)
@@ -23,7 +23,7 @@ class Source {
           website: map['publisher']['site'],
           url: map['information_url'],
           details: '',
-          date: DateFormat("yyyy-MM-ddTHH:mm:ss").tryParse(map['reviewDate'])!,
+          //date: DateFormat("yyyy-MM-ddTHH:mm:ss").tryParse(map['reviewDate'])!,
         );
 
   Source.fromJson(String json)

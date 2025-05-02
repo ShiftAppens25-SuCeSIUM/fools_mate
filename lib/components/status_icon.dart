@@ -13,7 +13,7 @@ class StatusIcon extends StatelessWidget {
         return Colors.green;
       case Status.FALSE:
         return Colors.red;
-      case Status.MISLEADING:
+      case Status.MIXED:
         return Colors.orange;
     }
   }
@@ -24,8 +24,8 @@ class StatusIcon extends StatelessWidget {
         return "TRUE";
       case Status.FALSE:
         return "FALSE";
-      case Status.MISLEADING:
-        return "MISLEADING";
+      case Status.MIXED:
+        return "MIXED";
     }
   }
 
@@ -35,7 +35,7 @@ class StatusIcon extends StatelessWidget {
         return Icons.check_circle;
       case Status.FALSE:
         return Icons.cancel;
-      case Status.MISLEADING:
+      case Status.MIXED:
         return Icons.warning;
     }
   }

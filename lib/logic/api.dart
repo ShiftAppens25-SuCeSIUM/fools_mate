@@ -1,18 +1,34 @@
+import 'dart:convert';
+
 import 'package:fools_mate/globals.dart' as globals;
 import 'package:http/http.dart' as http;
 
 import 'package:fools_mate/logic/fact_review.dart';
 
 Future<FactReview> reviewText(String query) async {
-  final response =
-      await http.post(Uri.http(globals.API, 'fact_check/text'), body: query);
+  final headers = <String, String>{
+    'Content-Type': 'application/json; charset=UTF-8'
+  };
+
+  final response = await http.post(
+    Uri.parse("${globals.API}/text"),
+    headers: headers,
+    body: jsonEncode({"query": query}),
+  );
 
   return FactReview.fromJson(response.body);
 }
 
 Future<FactReview> reviewURL(String url) async {
-  final response =
-      await http.post(Uri.http(globals.API, 'fact_check/url'), body: url);
+  final headers = <String, String>{
+    'Content-Type': 'application/json; charset=UTF-8'
+  };
+
+  final response = await http.post(
+    Uri.parse("${globals.API}/link"),
+    headers: headers,
+    body: jsonEncode({"query": url}),
+  );
 
   return FactReview.fromJson(response.body);
 }

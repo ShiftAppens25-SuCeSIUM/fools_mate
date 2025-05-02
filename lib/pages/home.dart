@@ -6,8 +6,15 @@ import 'package:fools_mate/globals.dart';
 import 'package:fools_mate/logic/query.dart' as queries;
 import 'package:fools_mate/pages/checker.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({super.key});
+
+  @override
+  State<StatefulWidget> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  final TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +53,7 @@ class Home extends StatelessWidget {
                     child: Column(
                       children: [
                         TextField(
+                          controller: controller,
                           minLines: 6,
                           maxLines: 6,
                           decoration: InputDecoration(
@@ -68,8 +76,10 @@ class Home extends StatelessWidget {
                           text: "Submit text",
                           onPressed: () => Navigator.of(context).push(
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    Checker(query: queries.TextQuery("cenas"))),
+                              builder: (context) => Checker(
+                                query: queries.TextQuery(controller.text),
+                              ),
+                            ),
                           ),
                         ),
                         SizedBox(height: 7),

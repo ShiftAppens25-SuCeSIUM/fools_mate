@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:fools_mate/logic/source.dart';
 
-enum Status { TRUE, FALSE, MISLEADING }
+enum Status { TRUE, FALSE, MIXED }
 
 class FactReview {
   final String query;
@@ -25,10 +25,10 @@ class FactReview {
           status: Status.values.firstWhere((s) =>
               s.name.toLowerCase() == (map['status'] as String).toLowerCase()),
           confidence: map['certainty'],
-          agree: (map['agree sources'] as List<dynamic>)
+          agree: (map['agree_sources'] as List<dynamic>)
               .map((s) => Source.fromMap(s))
               .toList(),
-          disagree: (map['disagree sources'] as List<dynamic>)
+          disagree: (map['disagree_sources'] as List<dynamic>)
               .map((s) => Source.fromMap(s))
               .toList(),
         );
