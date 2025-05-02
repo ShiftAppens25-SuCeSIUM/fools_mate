@@ -30,21 +30,21 @@ class _HomeState extends State<Home> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: 60),
+                SizedBox(height: 40),
                 Align(
                   alignment: Alignment.topCenter,
-                  child: Logo(height: 130),
+                  child: Logo(height: 70),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 10),
                 Text(
-                  'Truth, Verified.',
+                  'Think twice, check once.',
                   style: TextStyle(
                     fontSize: 16,
                     fontStyle: FontStyle.italic,
                     color: AppColors.slogan,
                   ),
                 ),
-                SizedBox(height: 50),
+                SizedBox(height: 20),
                 Card(
                   color: AppColors.card,
                   elevation: 4,
@@ -80,7 +80,7 @@ class _HomeState extends State<Home> {
                           onPressed: () => Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) => Checker(
-                                query: queries.TextQuery(controller.text),
+                                query: queries.TestQuery(),
                               ),
                             ),
                           ),
