@@ -3,7 +3,7 @@ import 'dart:convert';
 
 class Source {
   final String publisher;
-  final String website;
+  final String? website;
 
   final String url;
   final String details;

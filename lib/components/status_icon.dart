@@ -40,7 +40,7 @@ class StatusIcon extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(top: 3.0),
           child: Text(
-            status.toUpperCase(),
+            status.toUpperCase().replaceAll("_", " "),
             style: TextStyle(
               fontFamily: "BebasNeue",
               fontSize: 32,

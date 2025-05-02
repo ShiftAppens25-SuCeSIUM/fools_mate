@@ -17,8 +17,9 @@ Future<FactReview> reviewText(String query) async {
     body: jsonEncode({"query": query}),
   );
 
+  final json = utf8.decode(response.bodyBytes);
   print(response.body);
-  return FactReview.fromJson(response.body);
+  return FactReview.fromJson(json);
 }
 
 Future<FactReview> reviewURL(String url) async {
@@ -32,8 +33,9 @@ Future<FactReview> reviewURL(String url) async {
     body: jsonEncode({"query": url}),
   );
 
-  print(response.body);
-  return FactReview.fromJson(response.body);
+  final json = utf8.decode(response.bodyBytes);
+  print(json);
+  return FactReview.fromJson(json);
 }
 
 Future<FactReview> reviewFile(File file, {String? query}) async {
@@ -52,6 +54,7 @@ Future<FactReview> reviewFile(File file, {String? query}) async {
 
   final response = await http.Response.fromStream(await request.send());
 
-  print(response.body);
-  return FactReview.fromJson(response.body);
+  final json = utf8.decode(response.bodyBytes);
+  print(json);
+  return FactReview.fromJson(json);
 }

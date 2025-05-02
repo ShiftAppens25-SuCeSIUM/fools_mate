@@ -28,7 +28,11 @@ class SecondaryButton extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.file_upload_outlined, size: 20),
+            Icon(
+              Icons.file_upload_outlined,
+              size: 20,
+              color: AppColors.primary,
+            ),
             SizedBox(width: 8),
             Text(
               text,

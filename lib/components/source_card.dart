@@ -15,13 +15,7 @@ class SourceCard extends StatelessWidget {
 
   void _launchUrl(BuildContext context) async {
     final uri = Uri.parse(source.url);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri);
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Could not open the URL')),
-      );
-    }
+    await launchUrl(uri);
   }
 
   @override
@@ -60,18 +54,21 @@ class SourceCard extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 8),
-              Text(
-                source.website,
-                style: const TextStyle(
-                  fontSize: 12,
-                  color: AppColors.primary,
+              if (source.website != null)
+                Text(
+                  source.website ?? "",
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: AppColors.primary,
+                  ),
                 ),
-              ),
               const SizedBox(height: 20),
-              Text(
-                source.details,
-                maxLines: 4,
-                overflow: TextOverflow.ellipsis,
+              Expanded(
+                child: Text(
+                  source.details,
+                  softWrap: true,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
             ],
           ),
