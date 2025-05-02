@@ -80,7 +80,7 @@ class _HomeState extends State<Home> {
                           onPressed: () => Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) => Checker(
-                                query: queries.TestQuery(),
+                                query: queries.TextQuery(controller.text),
                               ),
                             ),
                           ),
