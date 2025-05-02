@@ -113,7 +113,7 @@ class TestQuery extends Query {
         Duration(seconds: 2),
         () => FactReview(
             query: "A Terra é quadrada?",
-            status: Status.TRUE,
+            status: "true",
             confidence: 0.84,
             agree: sourceListOne,
             disagree: sourceListTwo));

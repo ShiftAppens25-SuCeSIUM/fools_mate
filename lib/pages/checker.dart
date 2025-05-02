@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:fools_mate/components/logo.dart';
 import 'package:fools_mate/components/score_card.dart';
@@ -55,14 +56,47 @@ class _CheckerState extends State<Checker> {
                       SourceToggle(
                         agreed: data.agree,
                         disagreed: data.disagree,
-                        startAgreed: data.status == Status.TRUE,
+                        startAgreed: data.status == "true",
                       ),
                     ],
                   );
                 } else if (snapshot.hasError) {
                   return Text("Erro");
                 } else {
-                  return CircularProgressIndicator();
+                  final List<String> phrases = [
+                    "Check your facts before they checkmate you.",
+                    "Don’t bluff — verify your stuff.",
+                    "No pawns in misinformation.",
+                    "Fact check, then play your next move.",
+                    "The truth is your queen.",
+                  ];
+                  final Random _random = Random();
+                  final String selectedPhrase =
+                      phrases[_random.nextInt(phrases.length)];
+
+                  return Center(
+                      heightFactor: 6,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const CircularProgressIndicator(
+                              color: AppColors.primary),
+                          const SizedBox(height: 24),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 24.0),
+                            child: Text(
+                              selectedPhrase,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontStyle: FontStyle.italic,
+                                color: AppColors.primary,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ));
                 }
               }),
         ),

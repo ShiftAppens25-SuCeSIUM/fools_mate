@@ -70,7 +70,7 @@ class SourceCard extends StatelessWidget {
               const SizedBox(height: 20),
               Text(
                 source.details,
-                maxLines: 6,
+                maxLines: 4,
                 overflow: TextOverflow.ellipsis,
               ),
             ],

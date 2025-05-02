@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:fools_mate/components/status_icon.dart';
 import 'package:fools_mate/globals.dart';
-import 'package:fools_mate/logic/fact_review.dart';
 import 'package:fools_mate/logic/query.dart';
 
 class ScoreCard extends StatelessWidget {
   final Query query;
-  final Status status;
+  final String status;
   final double confidence;
 
   const ScoreCard({

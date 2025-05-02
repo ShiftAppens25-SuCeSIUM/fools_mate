@@ -2,12 +2,10 @@ import 'dart:convert';
 
 import 'package:fools_mate/logic/source.dart';
 
-enum Status { TRUE, FALSE, MIXED }
-
 class FactReview {
   final String query;
 
-  final Status status;
+  final String status;
   final double confidence;
   final List<Source> agree;
   final List<Source> disagree;
@@ -22,8 +20,7 @@ class FactReview {
   FactReview.fromMap(Map<String, dynamic> map)
       : this(
           query: map['query'],
-          status: Status.values.firstWhere((s) =>
-              s.name.toLowerCase() == (map['status'] as String).toLowerCase()),
+          status: (map['status'] as String).toLowerCase(),
           confidence: map['certainty'],
           agree: (map['agree_sources'] as List<dynamic>)
               .map((s) => Source.fromMap(s))

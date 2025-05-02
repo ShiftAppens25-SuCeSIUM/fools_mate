@@ -1,42 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:fools_mate/logic/fact_review.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class StatusIcon extends StatelessWidget {
-  final Status status;
+  final String status;
 
   const StatusIcon({super.key, required this.status});
 
-  Color _getStatusColor() {
-    switch (status) {
-      case Status.TRUE:
-        return Colors.green;
-      case Status.FALSE:
-        return Colors.red;
-      case Status.MIXED:
-        return Colors.orange;
+  Color _getStatusColor(String status) {
+    if (status.toLowerCase() == 'true') {
+      return Colors.green;
+    } else if (status.toLowerCase() == 'false') {
+      return Colors.red;
+    } else {
+      return Colors.orange;
     }
   }
 
-  String _getStatusText() {
-    switch (status) {
-      case Status.TRUE:
-        return "TRUE";
-      case Status.FALSE:
-        return "FALSE";
-      case Status.MIXED:
-        return "MIXED";
-    }
-  }
-
-  IconData _getStatusIcon() {
-    switch (status) {
-      case Status.TRUE:
-        return Icons.check_circle;
-      case Status.FALSE:
-        return Icons.cancel;
-      case Status.MIXED:
-        return Icons.warning;
+  IconData _getStatusIcon(String status) {
+    if (status.toLowerCase() == 'true') {
+      return Icons.check_circle;
+    } else if (status.toLowerCase() == 'false') {
+      return Icons.cancel;
+    } else {
+      return Icons.warning;
     }
   }
 
@@ -47,19 +33,19 @@ class StatusIcon extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Icon(
-          _getStatusIcon(),
-          color: _getStatusColor(),
+          _getStatusIcon(status),
+          color: _getStatusColor(status),
           size: 32,
         ),
         SizedBox(width: 8),
         Padding(
           padding: const EdgeInsets.only(top: 3.0),
           child: Text(
-            _getStatusText(),
+            status.toUpperCase(),
             style: GoogleFonts.bebasNeue(
               fontSize: 32,
               fontWeight: FontWeight.bold,
-              color: _getStatusColor(),
+              color: _getStatusColor(status),
             ),
           ),
         ),
