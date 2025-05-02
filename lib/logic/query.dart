@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fools_mate/components/prompt_card.dart';
 import 'package:fools_mate/logic/api.dart';
 import 'package:fools_mate/logic/fact_review.dart';
 
@@ -16,7 +17,13 @@ class TextQuery extends Query {
 
   @override
   Widget promptView() {
-    return Container();
+    return SizedBox(
+      width: 300,
+      height: 200,
+      child: PromptCard(
+        query: text,
+      ),
+    );
   }
 
   @override

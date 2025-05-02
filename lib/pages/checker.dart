@@ -1,3 +1,4 @@
+//import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:fools_mate/components/logo.dart';
 import 'package:fools_mate/globals.dart';
@@ -23,6 +24,7 @@ class Checker extends StatelessWidget {
               ),
               SizedBox(height: 50),
               query.promptView(),
+              SizedBox(height: 10),
               SizedBox(height: 30),
               FutureBuilder(
                 future: query.fetchReview(),
