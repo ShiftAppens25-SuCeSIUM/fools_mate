@@ -16,11 +16,11 @@ class Logo extends StatelessWidget {
         SizedBox(width: height / 10),
         Column(
           children: [
-            SizedBox(height: height * 8 / 100),
+            SizedBox(height: height * 20 / 100),
             Text(
               "CHECKMATE",
               style: GoogleFonts.bebasNeue(
-                fontSize: height / 2,
+                fontSize: height,
                 fontWeight: FontWeight.normal,
                 color: AppColors.primary,
               ),

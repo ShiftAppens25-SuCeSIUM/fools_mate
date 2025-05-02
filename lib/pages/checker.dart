@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fools_mate/components/logo.dart';
 import 'package:fools_mate/components/score_card.dart';
+import 'package:fools_mate/components/source_toggle.dart';
 import 'package:fools_mate/globals.dart';
 import 'package:fools_mate/logic/fact_review.dart';
 import 'package:fools_mate/logic/query.dart';
@@ -43,17 +44,16 @@ class _CheckerState extends State<Checker> {
                     children: [
                       Align(
                         alignment: Alignment.topCenter,
-                        child: Logo(height: 50),
-                      ),
-                      SizedBox(
-                        width: 300,
-                        height: 180,
-                        child: ScoreCard(
-                            status: data.status, confidence: data.confidence),
+                        child: Logo(height: 35),
                       ),
                       SizedBox(height: 10),
-                      widget.query.promptView(),
-                      SizedBox(height: 40),
+                      ScoreCard(
+                          query: widget.query,
+                          status: data.status,
+                          confidence: data.confidence),
+                      SizedBox(height: 10),
+                      SourceToggle(
+                          agreed: data.agree, disagreed: data.disagree),
                     ],
                   );
                 } else if (snapshot.hasError) {

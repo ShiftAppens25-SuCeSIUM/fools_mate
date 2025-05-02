@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:fools_mate/components/status_icon.dart';
 import 'package:fools_mate/globals.dart';
 import 'package:fools_mate/logic/fact_review.dart';
+import 'package:fools_mate/logic/query.dart';
 
 class ScoreCard extends StatelessWidget {
+  final Query query;
   final Status status;
   final double confidence;
 
@@ -11,6 +13,7 @@ class ScoreCard extends StatelessWidget {
     super.key,
     required this.status,
     required this.confidence,
+    required this.query,
   });
 
   @override
@@ -26,12 +29,15 @@ class ScoreCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            query.promptView(),
+            const Divider(),
             StatusIcon(status: status),
             SizedBox(height: 12),
             RichText(
               text: TextSpan(
                 style: TextStyle(fontSize: 16, color: Colors.black),
                 children: [
+                  TextSpan(text: 'Confidence level of: '),
                   TextSpan(
                     text: '${(confidence * 100).round()}%',
                     style: TextStyle(
@@ -39,7 +45,6 @@ class ScoreCard extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  TextSpan(text: ' of confidence'),
                 ],
               ),
             ),
