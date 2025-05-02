@@ -55,7 +55,10 @@ class _CheckerState extends State<Checker> {
                           confidence: data.confidence),
                       SizedBox(height: 10),
                       SourceToggle(
-                          agreed: data.agree, disagreed: data.disagree),
+                        agreed: data.agree,
+                        disagreed: data.disagree,
+                        startAgreed: data.status == Status.TRUE,
+                      ),
                     ],
                   );
                 } else if (snapshot.hasError) {

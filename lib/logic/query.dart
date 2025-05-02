@@ -20,16 +20,12 @@ class TextQuery extends Query {
 
   @override
   Widget promptView() {
-    return SizedBox(
-      width: 300,
-      height: 200,
-      child: Text(
-        text,
-        style: TextStyle(
-          color: AppColors.slogan,
-          fontStyle: FontStyle.italic,
-          fontSize: 16,
-        ),
+    return Text(
+      text,
+      style: TextStyle(
+        color: AppColors.slogan,
+        fontStyle: FontStyle.italic,
+        fontSize: 16,
       ),
     );
   }

@@ -6,17 +6,20 @@ import 'package:fools_mate/logic/source.dart';
 class SourceToggle extends StatelessWidget {
   final List<Source> agreed;
   final List<Source> disagreed;
+  final bool startAgreed;
 
   const SourceToggle({
     super.key,
     required this.agreed,
     required this.disagreed,
+    required this.startAgreed,
   });
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
+      initialIndex: startAgreed ? 0 : 1,
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
