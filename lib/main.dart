@@ -1,14 +1,79 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_sharing_intent/flutter_sharing_intent.dart';
+import 'package:flutter_sharing_intent/model/sharing_file.dart';
+import 'package:fools_mate/pages/checker.dart';
 import 'package:fools_mate/pages/home.dart';
+import 'package:fools_mate/logic/query.dart' as queries;
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  @override
+  State<StatefulWidget> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+  late StreamSubscription _intentDataStreamSubscription;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // For sharing images coming from outside the app while the app is in the memory
+    _intentDataStreamSubscription = FlutterSharingIntent.instance
+        .getMediaStream()
+        .listen((List<SharedFile> value) {
+      print("Shared: getMediaStream ${value.map((f) => f.value).join(",")}");
+      handleSharedContent(value.first);
+    }, onError: (err) {
+      print("getIntentDataStream error: $err");
+    });
+
+    // For sharing images coming from outside the app while the app is closed
+    FlutterSharingIntent.instance
+        .getInitialSharing()
+        .then((List<SharedFile> value) {
+      print("Shared: getInitialMedia ${value.map((f) => f.value).join(",")}");
+      handleSharedContent(value.first);
+    });
+  }
+
+  void handleSharedContent(SharedFile file) {
+    switch (file.type) {
+      case SharedMediaType.TEXT:
+        navigatorKey.currentState!.push(MaterialPageRoute(
+            builder: (context) =>
+                Checker(query: queries.TextQuery(file.value!))));
+        break;
+
+      case SharedMediaType.URL:
+        navigatorKey.currentState!.push(MaterialPageRoute(
+            builder: (context) =>
+                Checker(query: queries.UrlQuery(file.value!))));
+        break;
+
+      case SharedMediaType.IMAGE:
+        navigatorKey.currentState!.push(MaterialPageRoute(
+            builder: (context) => Checker(query: queries.MediaQuery())));
+        break;
+
+      case SharedMediaType.VIDEO:
+        navigatorKey.currentState!.push(MaterialPageRoute(
+            builder: (context) => Checker(query: queries.MediaQuery())));
+        break;
+
+      default:
+        print("Unsupported shared file type ${file.type}");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -32,7 +97,14 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
+      navigatorKey: navigatorKey,
       home: const Home(),
     );
+  }
+
+  @override
+  void dispose() {
+    _intentDataStreamSubscription.cancel();
+    super.dispose();
   }
 }
