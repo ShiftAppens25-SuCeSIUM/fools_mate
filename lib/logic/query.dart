@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:fools_mate/components/prompt_card.dart';
 import 'package:fools_mate/logic/api.dart';
@@ -44,19 +46,17 @@ class UrlQuery extends Query {
   Future<FactReview> fetchReview() => reviewURL(url);
 }
 
-class MediaQuery extends Query {
-  //TODO
-  //final File media
+class FileQuery extends Query {
+  final File file;
+  final String? query;
+
+  const FileQuery(this.file, {this.query});
 
   @override
   Widget promptView() {
-    // TODO: implement promptView
-    throw UnimplementedError();
+    return Container();
   }
 
   @override
-  Future<FactReview> fetchReview() {
-    // TODO: implement fetchReview
-    throw UnimplementedError();
-  }
+  Future<FactReview> fetchReview() => reviewFile(file, query: query);
 }

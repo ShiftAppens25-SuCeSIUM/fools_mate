@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:fools_mate/components/logo.dart';
 import 'package:fools_mate/components/primary_button.dart';
@@ -92,11 +95,22 @@ class _HomeState extends State<Home> {
                         SizedBox(height: 7),
                         SecondaryButton(
                           text: "Upload media",
-                          onPressed: () => Navigator.of(context).push(
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    Checker(query: queries.MediaQuery())),
-                          ),
+                          onPressed: () async {
+                            FilePickerResult? result =
+                                await FilePicker.platform.pickFiles();
+
+                            if (result != null) {
+                              File file = File(result.files.single.path!);
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (context) => Checker(
+                                        query: queries.FileQuery(file,
+                                            query: controller.text.isEmpty
+                                                ? null
+                                                : controller.text))),
+                              );
+                            }
+                          },
                         ),
                       ],
                     ),

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_sharing_intent/flutter_sharing_intent.dart';
@@ -64,13 +65,11 @@ class _MyAppState extends State<MyApp> {
         break;
 
       case SharedMediaType.IMAGE:
-        navigatorKey.currentState!.push(MaterialPageRoute(
-            builder: (context) => Checker(query: queries.MediaQuery())));
-        break;
-
       case SharedMediaType.VIDEO:
+      case SharedMediaType.FILE:
         navigatorKey.currentState!.push(MaterialPageRoute(
-            builder: (context) => Checker(query: queries.MediaQuery())));
+            builder: (context) =>
+                Checker(query: queries.FileQuery(File(file.value!)))));
         break;
 
       default:
