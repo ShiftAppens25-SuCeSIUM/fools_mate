@@ -1,8 +1,8 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:fools_mate/components/loading_indicator.dart';
 import 'package:fools_mate/components/logo.dart';
-import 'package:fools_mate/components/score_card.dart';
 import 'package:fools_mate/components/source_toggle.dart';
+import 'package:fools_mate/components/status_icon.dart';
 import 'package:fools_mate/globals.dart';
 import 'package:fools_mate/logic/fact_review.dart';
 import 'package:fools_mate/logic/query.dart';
@@ -41,8 +41,9 @@ class _CheckerState extends State<Checker> {
           child: FutureBuilder(
               future: review,
               builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  final FactReview data = snapshot.data!;
+                if (snapshot.hasError) {
+                  return Text("Erro");
+                } else {
                   return Column(
                     children: [
                       Align(
@@ -50,55 +51,60 @@ class _CheckerState extends State<Checker> {
                         child: Logo(height: 35),
                       ),
                       SizedBox(height: 10),
-                      ScoreCard(
-                          query: widget.query,
-                          status: data.status,
-                          confidence: data.confidence),
-                      SizedBox(height: 10),
-                      SourceToggle(
-                        agreed: data.agree,
-                        disagreed: data.disagree,
-                        startAgreed: data.status == "true",
+                      Card(
+                        color: AppColors.card,
+                        elevation: 4,
+                        margin: EdgeInsets.all(16),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12)),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            widget.query.promptView(),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  left: 24, right: 24, bottom: 24),
+                              child: Column(
+                                children: [
+                                  if (snapshot.hasData) ...[
+                                    StatusIcon(status: snapshot.data!.status),
+                                    SizedBox(height: 6),
+                                    RichText(
+                                      text: TextSpan(
+                                        style: TextStyle(
+                                            fontSize: 16, color: Colors.black),
+                                        children: [
+                                          TextSpan(
+                                              text: 'Confidence level of: '),
+                                          TextSpan(
+                                            text:
+                                                '${(snapshot.data!.confidence * 100).round()}%',
+                                            style: TextStyle(
+                                              color: AppColors.primary,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                  if (!snapshot.hasData) LoadingIndicator(),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
                       ),
+                      SizedBox(height: 10),
+                      if (snapshot.hasData)
+                        SourceToggle(
+                          agreed: snapshot.data!.agree,
+                          disagreed: snapshot.data!.disagree,
+                          startAgreed: snapshot.data!.status == "true",
+                        ),
                     ],
                   );
-                } else if (snapshot.hasError) {
-                  return Text("Erro");
-                } else {
-                  final List<String> phrases = [
-                    "Check your facts before they checkmate you.",
-                    "Don’t bluff — verify your stuff.",
-                    "No pawns in misinformation.",
-                    "Fact check, then play your next move.",
-                    "The truth is your queen.",
-                  ];
-                  final Random _random = Random();
-                  final String selectedPhrase =
-                      phrases[_random.nextInt(phrases.length)];
-
-                  return Center(
-                      heightFactor: 6,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const CircularProgressIndicator(
-                              color: AppColors.primary),
-                          const SizedBox(height: 24),
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 24.0),
-                            child: Text(
-                              selectedPhrase,
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontStyle: FontStyle.italic,
-                                color: AppColors.primary,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ));
                 }
               }),
         ),
