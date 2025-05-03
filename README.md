@@ -1,6 +1,6 @@
 # fools_mate
 
-A new Flutter project.
+The frontend of CheckMate project.
 
 ## Getting Started
 
