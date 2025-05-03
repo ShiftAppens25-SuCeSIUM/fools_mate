@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fools_mate/components/loading_indicator.dart';
 import 'package:fools_mate/components/logo.dart';
+import 'package:fools_mate/components/share_button.dart';
 import 'package:fools_mate/components/source_toggle.dart';
 import 'package:fools_mate/components/status_icon.dart';
 import 'package:fools_mate/globals.dart';
@@ -45,10 +46,19 @@ class _CheckerState extends State<Checker> {
                   return Text("Erro");
                 } else {
                   return Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Align(
-                        alignment: Alignment.topCenter,
-                        child: Logo(height: 35),
+                      Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topCenter,
+                            child: Logo(height: 35),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: ShareButton(),
+                          ),
+                        ],
                       ),
                       SizedBox(height: 10),
                       Card(
