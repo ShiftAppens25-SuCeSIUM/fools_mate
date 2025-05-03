@@ -10,34 +10,39 @@ class ShareButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        foregroundColor: AppColors.primary,
-        backgroundColor: AppColors.neutral,
+    return Material(
+      shape: CircleBorder(),
+      color: Colors.white,
+      elevation: 3.0,
+      child: InkWell(
+        customBorder: CircleBorder(),
+        onTap: () async {
+          final box = context.findRenderObject() as RenderBox?;
+          try {
+            final data = await screenshotController.capture();
+            final shareResult = await SharePlus.instance.share(
+              ShareParams(
+                files: [
+                  XFile.fromData(
+                    data!,
+                    name: 'checkmate_review.png',
+                    mimeType: 'image/png',
+                  ),
+                ],
+                sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
+                downloadFallbackEnabled: true,
+              ),
+            );
+            print(shareResult.raw);
+          } catch (e) {
+            print("Share error: $e");
+          }
+        },
+        child: Padding(
+          padding: EdgeInsets.all(12),
+          child: Icon(Icons.share, color: AppColors.primary),
+        ),
       ),
-      onPressed: () async {
-        final box = context.findRenderObject() as RenderBox?;
-        try {
-          final data = await screenshotController.capture();
-          final shareResult = await SharePlus.instance.share(
-            ShareParams(
-              files: [
-                XFile.fromData(
-                  data!,
-                  name: 'checkmate_review.png',
-                  mimeType: 'image/png',
-                ),
-              ],
-              sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
-              downloadFallbackEnabled: true,
-            ),
-          );
-          print(shareResult.raw);
-        } catch (e) {
-          print("Share error: $e");
-        }
-      },
-      child: const Text('Share'),
     );
   }
 }

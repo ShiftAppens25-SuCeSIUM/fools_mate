@@ -60,8 +60,11 @@ class _CheckerState extends State<Checker> {
                             ),
                             Align(
                               alignment: Alignment.topRight,
-                              child: ShareButton(
-                                  screenshotController: screenshotController),
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 5, right: 5),
+                                child: ShareButton(
+                                    screenshotController: screenshotController),
+                              ),
                             ),
                           ],
                         ),
