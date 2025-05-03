@@ -256,14 +256,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.15.0"
-  ogp_data_extract:
-    dependency: "direct main"
-    description:
-      name: ogp_data_extract
-      sha256: "646e04f4ecd6639140845b2c4ee78667b4c07f5f91e10ee5b8317752c968fb73"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.1"
   path:
     dependency: transitive
     description:
