@@ -22,33 +22,36 @@ class ScoreCard extends StatelessWidget {
       elevation: 4,
       margin: EdgeInsets.all(16),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      child: Padding(
-        padding: const EdgeInsets.all(24.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            query.promptView(),
-            const Divider(),
-            StatusIcon(status: status),
-            SizedBox(height: 12),
-            RichText(
-              text: TextSpan(
-                style: TextStyle(fontSize: 16, color: Colors.black),
-                children: [
-                  TextSpan(text: 'Confidence level of: '),
-                  TextSpan(
-                    text: '${(confidence * 100).round()}%',
-                    style: TextStyle(
-                      color: AppColors.primary,
-                      fontWeight: FontWeight.w600,
-                    ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          query.promptView(),
+          Padding(
+            padding: EdgeInsets.only(left: 24, right: 24, bottom: 24),
+            child: Column(
+              children: [
+                StatusIcon(status: status),
+                SizedBox(height: 6),
+                RichText(
+                  text: TextSpan(
+                    style: TextStyle(fontSize: 16, color: Colors.black),
+                    children: [
+                      TextSpan(text: 'Confidence level of: '),
+                      TextSpan(
+                        text: '${(confidence * 100).round()}%',
+                        style: TextStyle(
+                          color: AppColors.primary,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
+          )
+        ],
       ),
     );
   }

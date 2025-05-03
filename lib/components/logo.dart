@@ -12,7 +12,7 @@ class Logo extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Image.asset("assets/logo-purple.png", height: height),
-        SizedBox(width: height / 10),
+        SizedBox(width: height / 8),
         Column(
           children: [
             SizedBox(height: height * 20 / 100),

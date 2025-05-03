@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:any_link_preview/any_link_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:fools_mate/globals.dart';
 import 'package:fools_mate/logic/api.dart';
@@ -20,12 +21,20 @@ class TextQuery extends Query {
 
   @override
   Widget promptView() {
-    return Text(
-      text,
-      style: TextStyle(
-        color: AppColors.slogan,
-        fontStyle: FontStyle.italic,
-        fontSize: 16,
+    return Padding(
+      padding: EdgeInsets.only(top: 15, left: 20, right: 20),
+      child: Column(
+        children: [
+          Text(
+            text,
+            style: TextStyle(
+              color: AppColors.slogan,
+              fontStyle: FontStyle.italic,
+              fontSize: 16,
+            ),
+          ),
+          const Divider(height: 20),
+        ],
       ),
     );
   }
@@ -41,7 +50,20 @@ class UrlQuery extends Query {
 
   @override
   Widget promptView() {
-    return Container();
+    return Padding(
+      padding: EdgeInsets.only(bottom: 15),
+      child: AnyLinkPreview(
+        link: url,
+        displayDirection: UIDirection.uiDirectionHorizontal,
+        cache: const Duration(hours: 1),
+        backgroundColor: AppColors.background,
+        errorWidget: Container(
+          color: AppColors.background,
+          child: const Text('Oops!'),
+        ),
+        //errorImage: _errorImage,
+      ),
+    );
   }
 
   @override
