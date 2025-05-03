@@ -55,9 +55,10 @@ class _CheckerState extends State<Checker> {
                             child: Logo(height: 35),
                           ),
                           Align(
-                            alignment: Alignment.topRight,
-                            child: ShareButton(),
-                          ),
+                              alignment: Alignment.topRight,
+                              child: Padding(
+                                  padding: EdgeInsets.only(top: 5, right: 5),
+                                  child: ShareButton())),
                         ],
                       ),
                       SizedBox(height: 10),
