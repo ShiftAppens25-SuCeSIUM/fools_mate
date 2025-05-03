@@ -1,11 +1,12 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:fools_mate/globals.dart';
+import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
 
 class ShareButton extends StatelessWidget {
-  const ShareButton({super.key});
+  final ScreenshotController screenshotController;
+
+  const ShareButton({required this.screenshotController, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,14 +18,12 @@ class ShareButton extends StatelessWidget {
       onPressed: () async {
         final box = context.findRenderObject() as RenderBox?;
         try {
-          //final data = await rootBundle.load('assets/flutter_logo.png');
-          //final buffer = data.buffer;
+          final data = await screenshotController.capture();
           final shareResult = await SharePlus.instance.share(
             ShareParams(
               files: [
                 XFile.fromData(
-                  Uint8List(
-                      0), //buffer.asUint8List(data.offsetInBytes, data.lengthInBytes),
+                  data!,
                   name: 'checkmate_review.png',
                   mimeType: 'image/png',
                 ),
