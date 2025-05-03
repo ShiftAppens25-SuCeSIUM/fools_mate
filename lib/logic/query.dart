@@ -78,7 +78,23 @@ class FileQuery extends Query {
 
   @override
   Widget promptView() {
-    return Container();
+    //assume it is an image
+    return Padding(
+      padding: EdgeInsets.only(top: 15, left: 20, right: 20),
+      child: Column(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: Image.file(file),
+          ),
+          if (query != null) ...[
+            SizedBox(height: 10),
+            Text(query!),
+            Divider(height: 20),
+          ],
+        ],
+      ),
+    );
   }
 
   @override

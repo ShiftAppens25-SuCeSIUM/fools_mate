@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:fools_mate/globals.dart' as globals;
 import 'package:http/http.dart' as http;
 
@@ -18,7 +19,7 @@ Future<FactReview> reviewText(String query) async {
   );
 
   final json = utf8.decode(response.bodyBytes);
-  print(response.body);
+  debugPrint(json);
   return FactReview.fromJson(json);
 }
 
@@ -34,7 +35,7 @@ Future<FactReview> reviewURL(String url) async {
   );
 
   final json = utf8.decode(response.bodyBytes);
-  print(json);
+  debugPrint(json);
   return FactReview.fromJson(json);
 }
 
@@ -46,15 +47,12 @@ Future<FactReview> reviewFile(File file, {String? query}) async {
 
   final request = http.MultipartRequest("post", uri)
     ..headers.addAll(headers)
+    ..fields.addAll({'query': query ?? ''})
     ..files.add(data);
-
-  if (query != null) {
-    request.fields['query'] = query;
-  }
 
   final response = await http.Response.fromStream(await request.send());
 
   final json = utf8.decode(response.bodyBytes);
-  print(json);
+  debugPrint(json);
   return FactReview.fromJson(json);
 }
